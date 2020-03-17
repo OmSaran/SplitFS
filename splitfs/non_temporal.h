@@ -50,13 +50,7 @@
 #define MOVNT_THRESHOLD_GRANULARITY 64
 
 #define CLFLUSH_SIZE 64
-#ifndef __CLFLUSHOPT__
- #define _mm_clflushopt(addr)\
-  asm volatile("clflush %0" : "+m" (*(volatile char *)(addr)))
-#else
- #define _mm_clflushopt(addr)\
-  asm volatile("clflushopt %0" : "+m" (*(volatile char *)(addr)))
-#endif
+void (*_mm_flush)(void const* p);
 
 
 char *addr;

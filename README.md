@@ -111,3 +111,9 @@ We thank the National Science Foundation, VMware, Google, and Facebook for parti
 ## Contact
 
 Please contact us at `rak@cs.utexas.edu` or `vijayc@utexas.edu` with any questions.
+
+## Contributors
+
+[Vijay Chidambaram](https://github.com/vijay03)  
+[Rohan Kadekodi](https://github.com/rohankadekodi)  
+[Om Saran](https://github.com/OmSaran)
