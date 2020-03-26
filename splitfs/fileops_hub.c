@@ -887,7 +887,7 @@ RETT_EXECVP _hub_EXECVP(INTF_EXECVP) {
 		assert(0);
 	}
 
-	int res = _hub_managed_fileops->FTRUNC64(exec_hub_fd, (1024*1024));
+	int res = _hub_fileops->FTRUNC64(exec_hub_fd, (1024*1024));
 	if (res == -1) {
 		printf("%s: ftruncate failed. Err = %s\n", __func__, strerror(errno));
 		assert(0);
