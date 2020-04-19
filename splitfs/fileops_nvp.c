@@ -491,6 +491,12 @@ static inline size_t dynamic_remap_large(int file_fd, struct NVNode *node, int c
 						      app_start_off,
 						      (const char *) node->dr_info.start_addr,
 						      len_to_swap);
+				char fd_str[256];
+				char new_path[256];
+				sprintf(fd_str, "/proc/self/fd/%d", node->dr_info.dr_fd);
+				if (readlink(fd_str, new_path, sizeof(new_path)) == -1)
+					assert(0);
+				_nvp_fileops->UNLINK(new_path);
 				
 				END_TIMING(swap_extents_t, swap_extents_time);
 				num_appendfsync++;
@@ -571,6 +577,12 @@ static inline size_t dynamic_remap_large(int file_fd, struct NVNode *node, int c
 					      app_start_off,
 					      (const char *) node->dr_info.start_addr,
 					      len_to_swap);
+			char fd_str[256];
+			char new_path[256];
+			sprintf(fd_str, "/proc/self/fd/%d", node->dr_info.dr_fd);
+			if (readlink(fd_str, new_path, sizeof(new_path)) == -1)
+				assert(0);
+			_nvp_fileops->UNLINK(new_path);
 
 #if 0
 			len_swapped = _nvp_fileops->PWRITE(file_fd, (char *) (node->dr_info.start_addr + app_start_off), len_to_swap, file_start_off);
@@ -706,6 +718,12 @@ static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 					      app_start_off,
 					      (const char *) node->dr_info.start_addr,
 					      len_to_swap);
+			char fd_str[256];
+			char new_path[256];
+			sprintf(fd_str, "/proc/self/fd/%d", node->dr_info.dr_fd);
+			if (readlink(fd_str, new_path, sizeof(new_path)) == -1)
+				assert(0);
+			_nvp_fileops->UNLINK(new_path);
 #if 0
 			len_swapped = _nvp_fileops->PWRITE(file_fd, (char *) (node->dr_info.start_addr + app_start_off), len_to_swap, file_start_off);
 #endif
@@ -781,6 +799,12 @@ static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 					      app_start_off,
 					      (const char *) node->dr_info.start_addr,
 					      len_to_swap);
+			char fd_str[256];
+			char new_path[256];
+			sprintf(fd_str, "/proc/self/fd/%d", node->dr_info.dr_fd);
+			if (readlink(fd_str, new_path, sizeof(new_path)) == -1)
+				assert(0);
+			_nvp_fileops->UNLINK(new_path);
 #if 0
 			len_swapped = _nvp_fileops->PWRITE(file_fd, (char *) (node->dr_info.start_addr + app_start_off), len_to_swap, file_start_off);
 #endif
@@ -952,6 +976,13 @@ void nvp_cleanup(void)
 #endif
 	
 	nvp_free_dr_mmaps();
+	// Relink the files that have not been relinked.
+	for(i=0; i<OPEN_MAX; i++) {
+		struct NVFile temp = _nvp_fd_lookup[i];
+		if(temp.valid && temp.node->true_length != temp.node->length) {
+			dynamic_remap(temp.fd, temp.node, 1);
+		}
+	}
 	free(_nvp_fd_lookup);
 
 	for (i = 0; i < NUM_NODE_LISTS; i++) {
@@ -1624,7 +1655,16 @@ void nvp_free_dr_mmaps()
 		temp_free_pool_of_dr_mmaps = LFDS711_QUEUE_UMM_GET_VALUE_FROM_ELEMENT( *qe );
 		addr = temp_free_pool_of_dr_mmaps->start_addr;
 		munmap((void *)addr, DR_SIZE);
+
+		char fd_str[256];
+		char new_path[256];
+		sprintf(fd_str, "/proc/self/fd/%d", temp_free_pool_of_dr_mmaps->dr_fd);
+		if (readlink(fd_str, new_path, sizeof(new_path)) == -1)
+			assert(0);
+		_nvp_fileops->UNLINK(new_path);
+
 		close(temp_free_pool_of_dr_mmaps->dr_fd);
+		
 		__atomic_fetch_sub(&num_drs_left, 1, __ATOMIC_SEQ_CST);
 	}
 	lfds711_queue_umm_cleanup( &qs, NULL );
