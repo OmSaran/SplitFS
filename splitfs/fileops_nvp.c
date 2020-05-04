@@ -1619,6 +1619,8 @@ void nvp_free_dr_mmaps()
 	unsigned long offset_in_page = 0;
 	struct free_dr_pool *temp_free_pool_of_dr_mmaps;
 	int i = 0;
+	int result = 0;
+	int eid = geteuid();
 	
 	while( lfds711_queue_umm_dequeue(&qs, &qe) ) {
 		temp_free_pool_of_dr_mmaps = LFDS711_QUEUE_UMM_GET_VALUE_FROM_ELEMENT( *qe );
@@ -1635,7 +1637,15 @@ void nvp_free_dr_mmaps()
 		close(temp_free_pool_of_dr_mmaps->dr_fd);
 
 		// Remove the file.
-		_nvp_fileops->UNLINK(new_path);
+		result = _nvp_fileops->UNLINK(new_path);
+		if(result != 0) {
+			if(errno == EACCES) {
+				OM("Failed to remove staging file due to permission error. Reattempting using real user id");
+				setuid(getuid());
+				_nvp_fileops->UNLINK(new_path);
+				setuid(eid);
+			}
+		}
 		__atomic_fetch_sub(&num_drs_left, 1, __ATOMIC_SEQ_CST);
 	}
 	lfds711_queue_umm_cleanup( &qs, NULL );
@@ -4498,6 +4508,33 @@ RETT_MKNOD _nvp_MKNOD(INTF_MKNOD)
 	}
 #endif
 	
+	return result;
+}
+
+RETT_SETUID _nvp_SETUID(INTF_SETUID)
+{
+	RETT_SETUID result = 0;
+	instrumentation_type op_log_entry_time;
+
+	struct lfds711_queue_umm_state tqs;
+	struct lfds711_queue_umm_element tqe_dummy;
+
+	lfds711_queue_umm_init_valid_on_current_logical_core(&tqs, &tqe_dummy);
+
+	struct free_dr_pool *temp_free_pool_of_dr_mmaps;
+
+
+	while( lfds711_queue_umm_dequeue(&qs, &qe) ) {
+		temp_free_pool_of_dr_mmaps = LFDS711_QUEUE_UMM_GET_VALUE_FROM_ELEMENT( *qe );
+		fchown(temp_free_pool_of_dr_mmaps->dr_fd, uid);
+		lfds711_queue_umm_enqueue(&tqs, &qe);
+	}
+
+	while( lfds711_queue_umm_dequeue(&tqs, &qe) ) {		
+		lfds711_queue_umm_enqueue(&qs, &qe);
+	}
+
+	result = _nvp_fileops->SETUID(CALL_SETUID);	
 	return result;
 }
 
