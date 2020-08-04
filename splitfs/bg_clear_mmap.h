@@ -44,9 +44,9 @@ static void clean_dr_mmap() {
 			assert(0);
 		}
 		if (clean_overwrite)
-			ret = posix_fallocate(dr_fd, 0, DR_OVER_SIZE);
+			ret = _hub_find_fileop("posix")->POSIX_FALLOCATE(dr_fd, 0, DR_OVER_SIZE);
 		else
-			ret = posix_fallocate(dr_fd, 0, DR_SIZE);
+			ret = _hub_find_fileop("posix")->POSIX_FALLOCATE(dr_fd, 0, DR_SIZE);
 			
 		if (ret < 0) {
 			MSG("%s: posix_fallocate failed. Err = %s\n",
