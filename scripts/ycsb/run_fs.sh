@@ -13,9 +13,9 @@ run_id=$3
 cur_dir=`readlink -f ./`
 src_dir=`readlink -f ../../`
 pmem_dir=/mnt/pmem_emul
-leveldb_dir=$src_dir/leveldb
+leveldb_dir=$src_dir/../rocksdb2
 leveldb_build_dir=$leveldb_dir/build
-database_dir=$pmem_dir/leveldbtest-1000
+database_dir=$pmem_dir/rocksdbtest-1000
 workload_dir=$leveldb_dir/workloads
 result_dir=$src_dir/results
 fs_results=$result_dir/$fs/$workload
@@ -60,9 +60,9 @@ load_workload()
     date
 
     if [ $run_boost -eq 1 ]; then
-        LD_PRELOAD=$src_dir/splitfs-so/ycsb/strict/libnvp.so $leveldb_build_dir/db_bench --use_existing_db=0 --benchmarks=ycsb,stats,printdb --db=$database_dir --threads=1 --open_files=1000 2>&1 | tee $fs_results/run$run_id
+        LD_PRELOAD=$src_dir/splitfs-so/ycsb/strict/libnvp.so $leveldb_dir/db_bench --use_existing_db=0 --benchmarks=ycsb,stats,printdb --db=$database_dir --threads=1 --open_files=1000 2>&1 | tee $fs_results/run$run_id
     else
-        $leveldb_build_dir/db_bench --use_existing_db=0 --benchmarks=ycsb,stats,printdb --db=$database_dir --threads=1 --open_files=1000 2>&1 | tee $fs_results/run$run_id
+        $leveldb_dir/db_bench --use_existing_db=0 --benchmarks=ycsb,stats,printdb --db=$database_dir --threads=1 --open_files=1000 2>&1 | tee $fs_results/run$run_id
     fi
 
     date

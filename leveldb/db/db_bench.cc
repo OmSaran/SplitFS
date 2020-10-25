@@ -486,7 +486,7 @@ class Benchmark {
 		unsigned long long kv_itseek;
 		unsigned long long kv_itnext;
 	};
-	
+	#ifdef 1
   struct result_t results[10];
 	
   unsigned long long print_splitup(int tid) {

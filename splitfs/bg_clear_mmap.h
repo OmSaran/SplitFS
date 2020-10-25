@@ -38,6 +38,7 @@ static void clean_dr_mmap() {
 			sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-OVER-XXXXXX");
 		else
 			sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-XXXXXX");
+		MSG("######## clean_dr_MMAP!!!! ##########\n");
 		dr_fd = _hub_find_fileop("posix")->OPEN(mktemp(dr_fname), O_RDWR | O_CREAT, 0666);
 		if (dr_fd < 0) {
 			MSG("%s: mkstemp of DR file failed. Err = %s\n",

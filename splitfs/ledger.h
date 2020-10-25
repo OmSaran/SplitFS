@@ -160,7 +160,7 @@ struct full_dr {
 #endif
 
 #define INIT_NUM_DR_OVER 2
-#define BG_NUM_DR 2
+#define BG_NUM_DR 0
 #define PRINT_CONTENTION_MSGS 0
 #define TOTAL_CLOSED_INODES 4096
 #define LARGE_TBL_MAX 5
@@ -389,8 +389,8 @@ volatile int async_close_enable;
 #define ANON_MAX_MMAP_SIZE 536870912
 #endif
 
-#define DR_SIZE (256*1024*1024)
-#define DR_OVER_SIZE (256*1024*1024)
+#define DR_SIZE (16*1024*1024)
+#define DR_OVER_SIZE (16*1024*1024)
 #define NVMM_PATH "/mnt/pmem_emul/"
 #define DR_APPEND_PATH "/mnt/pmem_emul/DR-XXXXXX"
 #define DR_OVER_PATH "/mnt/pmem_emul/DR-OVER-XXXXXX"

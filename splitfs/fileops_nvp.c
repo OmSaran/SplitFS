@@ -185,6 +185,7 @@ static inline void create_dr_mmap(struct NVNode *node, int is_overwrite)
 		sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-OVER-XXXXXX");
 	else
 		sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-XXXXXX");
+	MSG("######## create_dr_mmap..... ##########\n");
 	dr_fd = _hub_find_fileop("posix")->OPEN(mktemp(dr_fname), O_RDWR | O_CREAT, 0666);
 	if (dr_fd < 0) {
 		MSG("%s: mkstemp of DR file failed. Err = %s\n",
@@ -1301,6 +1302,7 @@ void _nvp_init2(void)
 		prefault_buf[i] = '0';
 
 	for (i = 0; i < INIT_NUM_DR; i++) {
+		MSG("######## INIT_NUM_DR ##########\n");
 		sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-XXXXXX");
 		dr_fd = _hub_find_fileop("posix")->OPEN(mktemp(dr_fname), O_RDWR | O_CREAT, 0666);
 		if (dr_fd < 0) {
@@ -2797,7 +2799,9 @@ not_found:
 			   __func__, nvf->node->dr_info.dr_serialno, nvf->node->dr_info.valid_offset);
 
 	} else {
-		DEBUG_FILE("%s: Allocating new DR\n", __func__);
+		char fn[256];
+		get_file_name(fn, nvf->fd);
+		MSG("%s: Allocating new DR for %s \n", __func__, fn);
 		// Nothing in global pool
 		int dr_fd = 0;
 		int i = 0;
@@ -3385,6 +3389,7 @@ RETT_PWRITE write_to_file_mmap(int file,
 #if BG_CLEANING
 		change_dr_mmap(nvf->node, 0);
 #else
+		MSG("********* CREATING DR MMAP *********\n");
 		create_dr_mmap(nvf->node, 0);
 #endif
 		END_TIMING(clear_dr_t, clear_dr_time);
@@ -3958,8 +3963,17 @@ static ssize_t _nvp_check_write_size_valid(size_t count)
 /* ========================== POSIX API methods =========================== */
 
 
-RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
+void get_file_name(char *fn, int fd) {
+    char fd_str[256];
+    
+    sprintf(fd_str, "/proc/self/fd/%d", fd);
+    int file_name_size = readlink(fd_str, fn, 256);
+    if (file_name_size == -1)
+        assert(0);
+    fn[file_name_size] = '\0';
+}
 
+RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	RETT_CLOSE result;
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	instrumentation_type node_lookup_lock_time, nvnode_lock_time, close_syscall_time,
@@ -4050,6 +4064,9 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	}
 
 	nvf->valid = 0;
+	char fn[256];
+	get_file_name(fn, file);
+	MSG(" ^^^^^^ CLOSING %s with refcount = %d. start addr = %p !! ^^^^^\n", fn, nvf->node->reference, nvf->node->dr_info.start_addr);
 	if (nvf->node->reference == 0) {
 		nvp_add_to_inode_mapping(nvf->node, nvf->serialno);
 		nvf->node->backup_serialno = 0;
@@ -4057,6 +4074,7 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 		_nvp_ino_lookup[index] = 0;
 		DEBUG("Close Cleanup node for %d\n", file);
 		if(nvf->node->dr_info.start_addr != 0 || nvf->node->dr_over_info.start_addr != 0) {
+			MSG(" ^^^^^^ Transferring to free dr pool = %d !! ^^^^^\n", fn);
 			nvp_transfer_to_free_dr_pool(nvf->node);
 		}
 		nvf->node->async_file_close = 0;

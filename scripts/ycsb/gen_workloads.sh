@@ -5,7 +5,7 @@ set -x
 cur_dir=`readlink -f ./`
 src_dir=`readlink -f ../../`
 ycsb_dir=${src_dir}/ycsb
-leveldb_dir=${src_dir}/leveldb/workloads
+leveldb_dir=${src_dir}/../rocksdb2/workloads
 mkdir -p ${leveldb_dir}
 
 five_mil=5000000
