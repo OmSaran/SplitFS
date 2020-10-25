@@ -6761,13 +6761,6 @@ RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 	_nvp_FSYNC(file);
 	NVP_LOCK_NODE_WR(nvf);
 
-	// Doing because our mmaps maybe stale after fallocate
-	clear_tbl_mmap_entry(tbl_app, NUM_APP_TBL_MMAP_ENTRIES);
-
-#if DATA_JOURNALING_ENABLED
-	clear_tbl_mmap_entry(tbl_over, NUM_OVER_TBL_MMAP_ENTRIES);
-#endif
-
 	result = _nvp_fileops->POSIX_FALLOCATE(CALL_POSIX_FALLOCATE);
 
 	int ret = fstat(file, &sbuf);
@@ -6803,13 +6796,6 @@ RETT_POSIX_FALLOCATE64 _nvp_POSIX_FALLOCATE64(INTF_POSIX_FALLOCATE64)
 
 	_nvp_FSYNC(file);
 	NVP_LOCK_NODE_WR(nvf);
-
-	// Doing because our mmaps maybe stale after fallocate
-	clear_tbl_mmap_entry(tbl_app, NUM_APP_TBL_MMAP_ENTRIES);
-
-#if DATA_JOURNALING_ENABLED
-	clear_tbl_mmap_entry(tbl_over, NUM_OVER_TBL_MMAP_ENTRIES);
-#endif
 
 	result = _nvp_fileops->POSIX_FALLOCATE64(CALL_POSIX_FALLOCATE64);
 
@@ -6853,13 +6839,6 @@ RETT_FALLOCATE _nvp_FALLOCATE(INTF_FALLOCATE)
 
 	_nvp_FSYNC(file);
 	NVP_LOCK_NODE_WR(nvf);
-
-	// Doing because our mmaps maybe stale after fallocate
-	clear_tbl_mmap_entry(tbl_app, NUM_APP_TBL_MMAP_ENTRIES);
-
-#if DATA_JOURNALING_ENABLED
-	clear_tbl_mmap_entry(tbl_over, NUM_OVER_TBL_MMAP_ENTRIES);
-#endif
 
 	result = _nvp_fileops->FALLOCATE(CALL_FALLOCATE);
 
