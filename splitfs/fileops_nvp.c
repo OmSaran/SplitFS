@@ -3979,6 +3979,9 @@ void get_file_name(char *fn, int fd) {
 }
 
 RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
+	char fn[256];
+	get_file_name(fn, file);
+	MSG("Closing the file %s\n", fn);
 	RETT_CLOSE result;
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	instrumentation_type node_lookup_lock_time, nvnode_lock_time, close_syscall_time,
@@ -3990,6 +3993,10 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 		return -1;
 
 	struct NVFile* nvf = &_nvp_fd_lookup[file];
+	int before_offset = *(nvf->offset);
+	int before_true_length = nvf->node->true_length;
+	int before_length = nvf->node->length;
+
 	num_close++;
 	if (nvf->posix) {
 		nvf->valid = 0;
@@ -4014,6 +4021,8 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 #if !SYSCALL_APPENDS
 	fsync_flush_on_fsync(nvf, cpuid, 1, 0);	
 #endif
+
+	MSG("Closing the file %s with before_offset = %d; after_offset = %d, before_true_length = %d; true_length %d; and before_length=%d; after_length %d\n", fn, before_offset, *(nvf->offset), before_true_length, nvf->node->true_length, before_length, nvf->node->length);
 	/* 
 	 * nvf->node->reference contains how many threads have this file open. 
 	 */
@@ -4037,6 +4046,7 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	NVP_LOCK_NODE_WR(nvf);
 	nvf->node->reference--;
 	NVP_UNLOCK_NODE_WR(nvf);
+	_nvp_FTRUNC(file, before_true_length);
 
 	if (nvf->node->reference == 0) {
 		nvf->node->serialno = 0;
@@ -4069,7 +4079,6 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	}
 
 	nvf->valid = 0;
-	char fn[256];
 	get_file_name(fn, file);
 	// MSG(" ^^^^^^ CLOSING %s with refcount = %d. start addr = %p !! ^^^^^\n", fn, nvf->node->reference, nvf->node->dr_info.start_addr);
 	if (nvf->node->reference == 0) {
@@ -4156,8 +4165,8 @@ RETT_OPEN _nvp_OPEN(INTF_OPEN)
         DEBUG_FILE("_nvp_OPEN(%s)\n", path);
 	num_open++;
 
-	DEBUG("Attempting to _nvp_OPEN the file \"%s\" with the following "
-		"flags (0x%X): ", path, oflag);
+	MSG("Attempting to _nvp_OPEN the file \"%s\" with the following "
+		"flags (0x%X): \n", path, oflag);
 
 	/*
 	 *  Print all the flags passed to open() 
@@ -5320,7 +5329,7 @@ RETT_FWRITE _nvp_FWRITE(INTF_FWRITE)
 #if 1
 RETT_FSEEK _nvp_FSEEK(INTF_FSEEK)
 {
-	assert(0);
+	// assert(0);
 	RETT_WRITE result;
 	int fd = -1;
 
@@ -6697,7 +6706,7 @@ RETT_FSTAT64 _nvp_FSTAT64(INTF_FSTAT64)
 */
 RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 {
-	assert(0);
+	// assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	RETT_POSIX_FALLOCATE result = 0;
 	struct stat sbuf;
@@ -6744,7 +6753,7 @@ RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 */
 RETT_POSIX_FALLOCATE64 _nvp_POSIX_FALLOCATE64(INTF_POSIX_FALLOCATE64)
 {
-	assert(0);
+	// assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	RETT_POSIX_FALLOCATE64 result = 0;
 	struct stat sbuf;
