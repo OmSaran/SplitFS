@@ -389,8 +389,8 @@ volatile int async_close_enable;
 #define ANON_MAX_MMAP_SIZE 536870912
 #endif
 
-#define DR_SIZE (16*1024*1024)
-#define DR_OVER_SIZE (16*1024*1024)
+#define DR_SIZE (64*1024*1024)
+#define DR_OVER_SIZE (64*1024*1024)
 #define NVMM_PATH "/mnt/pmem_emul/"
 #define DR_APPEND_PATH "/mnt/pmem_emul/DR-XXXXXX"
 #define DR_OVER_PATH "/mnt/pmem_emul/DR-OVER-XXXXXX"

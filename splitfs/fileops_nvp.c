@@ -1,5 +1,4 @@
 // a module which repalces the standart POSIX functions with memory mapped equivalents
-
 #include "nv_common.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -185,7 +184,7 @@ static inline void create_dr_mmap(struct NVNode *node, int is_overwrite)
 		sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-OVER-XXXXXX");
 	else
 		sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-XXXXXX");
-	MSG("######## create_dr_mmap..... ##########\n");
+	// MSG("######## create_dr_mmap..... ##########\n");
 	dr_fd = _hub_find_fileop("posix")->OPEN(mktemp(dr_fname), O_RDWR | O_CREAT, 0666);
 	if (dr_fd < 0) {
 		MSG("%s: mkstemp of DR file failed. Err = %s\n",
@@ -203,7 +202,7 @@ static inline void create_dr_mmap(struct NVNode *node, int is_overwrite)
 		assert(0);
 	}
 
-	fstat(dr_fd, &stat_buf);
+	_nvp_fileops->STAT(_STAT_VER, dr_fd, &stat_buf);
 
 	if (is_overwrite) {
 		node->dr_over_info.dr_fd = dr_fd;
@@ -1302,7 +1301,7 @@ void _nvp_init2(void)
 		prefault_buf[i] = '0';
 
 	for (i = 0; i < INIT_NUM_DR; i++) {
-		MSG("######## INIT_NUM_DR ##########\n");
+		// MSG("######## INIT_NUM_DR ##########\n");
 		sprintf(dr_fname, "%s%s", NVMM_PATH, "DR-XXXXXX");
 		dr_fd = _hub_find_fileop("posix")->OPEN(mktemp(dr_fname), O_RDWR | O_CREAT, 0666);
 		if (dr_fd < 0) {
@@ -1327,7 +1326,7 @@ void _nvp_init2(void)
 			 dr_fd, //fd_with_max_perms,
 			 0
 			 );
-		fstat(dr_fd, &stat_buf);
+		_hub_find_fileop("posix")->FSTAT(_STAT_VER, dr_fd, &stat_buf);
 		free_pool_mmaps[i].dr_serialno = stat_buf.st_ino;
 		free_pool_mmaps[i].dr_fd = dr_fd;
 	        free_pool_mmaps[i].valid_offset = 0;
@@ -2801,7 +2800,7 @@ not_found:
 	} else {
 		char fn[256];
 		get_file_name(fn, nvf->fd);
-		MSG("%s: Allocating new DR for %s \n", __func__, fn);
+		// MSG("%s: Allocating new DR for %s \n", __func__, fn);
 		// Nothing in global pool
 		int dr_fd = 0;
 		int i = 0;
@@ -2835,7 +2834,7 @@ not_found:
 
 		DEBUG_FILE("%s: Setting offset_start to DR_SIZE. FD = %d\n",
 			   __func__, nvf->fd);
-		fstat(dr_fd, &stat_buf);
+		_nvp_fileops->STAT(_STAT_VER, dr_fd, &stat_buf);
 		nvf->node->dr_info.dr_serialno = stat_buf.st_ino;
 		nvf->node->dr_info.dr_fd = dr_fd;
 		nvf->node->dr_info.valid_offset = 0;
@@ -3619,7 +3618,7 @@ RETT_PWRITE _nvp_do_pwrite(INTF_PWRITE,
 	 write_offset = offset;		
 
 	 if (write_offset >= nvf->node->length + 1) {
-		 DEBUG_FILE("%s: Hole getting created. Doing Write system call\n", __func__);
+		 MSG("%s: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Hole getting created. Doing Write system call\n", __func__);
 		 posix_write = _nvp_fileops->PWRITE(file, buf, count, write_offset);
 		 _nvp_fileops->FSYNC(file);
 		 num_posix_write++;
@@ -3833,7 +3832,13 @@ RETT_PWRITE _nvp_do_pwrite(INTF_PWRITE,
 		 "%li, file off: %li, map len: %li, node %p\n",
 		 count, nvf->node->length, nvf->offset,
 		 nvf->node->maplength, nvf->node);
-	 return write_count;
+	if(count != write_count) {
+		MSG("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ MISMATCH %d != %d !! @@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", count, write_count);
+		assert(0);
+	} else {
+		// MSG("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ MATCH SUCCESSFUL! %d == %d !! @@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", count-offset, write_count);
+	}
+	 return count;
  }
 
  void _nvp_test_invalidate_node(struct NVFile* nvf)
@@ -4066,7 +4071,7 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	nvf->valid = 0;
 	char fn[256];
 	get_file_name(fn, file);
-	MSG(" ^^^^^^ CLOSING %s with refcount = %d. start addr = %p !! ^^^^^\n", fn, nvf->node->reference, nvf->node->dr_info.start_addr);
+	// MSG(" ^^^^^^ CLOSING %s with refcount = %d. start addr = %p !! ^^^^^\n", fn, nvf->node->reference, nvf->node->dr_info.start_addr);
 	if (nvf->node->reference == 0) {
 		nvp_add_to_inode_mapping(nvf->node, nvf->serialno);
 		nvf->node->backup_serialno = 0;
@@ -5233,9 +5238,10 @@ RETT_READ _nvp_READ(INTF_READ)
 }
 
 
-#ifdef TRACE_FP_CALLS
+#if 1
 RETT_FWRITE _nvp_FWRITE(INTF_FWRITE)
 {
+	// assert(0);
 	DEBUG_FILE("_nvp_WRITE %d\n", fileno(fp));
 	num_write++;
 	RETT_FWRITE result;
@@ -5304,13 +5310,17 @@ RETT_FWRITE _nvp_FWRITE(INTF_FWRITE)
 
 	write_size += result;
 	result = result/length;
+	if(result != nmemb) {
+		assert(0);
+	}
 	return result;
 }
 #endif
 
-#ifdef TRACE_FP_CALLS
+#if 1
 RETT_FSEEK _nvp_FSEEK(INTF_FSEEK)
 {
+	assert(0);
 	RETT_WRITE result;
 	int fd = -1;
 
@@ -5323,6 +5333,7 @@ RETT_FSEEK _nvp_FSEEK(INTF_FSEEK)
 #ifdef TRACE_FP_CALLS
 RETT_FTELL _nvp_FTELL(INTF_FTELL)
 {
+	assert(0);
 	RETT_FTELL result;
 	int fd = -1;
 	struct NVFile *nvf = NULL;
@@ -5337,6 +5348,7 @@ RETT_FTELL _nvp_FTELL(INTF_FTELL)
 #ifdef TRACE_FP_CALLS
 RETT_FTELLO _nvp_FTELLO(INTF_FTELLO)
 {
+	assert(0);
 	DEBUG_FILE("%s: start\n", __func__);
 	RETT_FTELLO result;
 
@@ -5523,7 +5535,8 @@ RETT_PREAD _nvp_PREAD(INTF_PREAD)
 RETT_PWRITE _nvp_PWRITE(INTF_PWRITE)
 {
 	CHECK_RESOLVE_FILEOPS(_nvp_);
-	DEBUG("_nvp_PWRITE %d\n", file);
+	MSG("_nvp_PWRITE %d\n", file);
+	assert(0);
 	num_write++;
 	instrumentation_type write_time;
 	RETT_PWRITE result;
@@ -5661,6 +5674,7 @@ RETT_SEEK64 _nvp_SEEK64(INTF_SEEK64)
 
 RETT_FTRUNC _nvp_FTRUNC(INTF_FTRUNC)
 {
+	// assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	RETT_FTRUNC ret = 0;
 
@@ -5677,6 +5691,7 @@ RETT_FTRUNC _nvp_FTRUNC(INTF_FTRUNC)
 
 RETT_TRUNC _nvp_TRUNC(INTF_TRUNC)
 {
+	assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	RETT_TRUNC ret = 0;
 	struct stat stat_buf;
@@ -5703,6 +5718,7 @@ RETT_TRUNC _nvp_TRUNC(INTF_TRUNC)
 
 RETT_FTRUNC64 _nvp_FTRUNC64(INTF_FTRUNC64)
 {
+	// assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 
 	instrumentation_type clear_mmap_tbl_time;
@@ -5724,6 +5740,9 @@ RETT_FTRUNC64 _nvp_FTRUNC64(INTF_FTRUNC64)
 
 	if (nvf->posix) {
 		DEBUG("Call posix TRUNC64 for fd %d\n", nvf->fd);
+		char fn[256];
+		get_file_name(fn, file);
+		MSG("POSIX: Truncating %s from %d to %d\n", fn, nvf->node->true_length, length);
 		return _nvp_fileops->FTRUNC64(CALL_FTRUNC64);
 	}
 
@@ -5743,6 +5762,7 @@ RETT_FTRUNC64 _nvp_FTRUNC64(INTF_FTRUNC64)
 		TBL_ENTRY_UNLOCK_WR(tbl_app);
 		NVP_UNLOCK_NODE_WR(nvf);
 		NVP_UNLOCK_FD_RD(nvf, cpuid);
+		MSG("TRUNC FAILING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 		return -1;
 	}
 
@@ -5755,9 +5775,20 @@ RETT_FTRUNC64 _nvp_FTRUNC64(INTF_FTRUNC64)
 		TBL_ENTRY_UNLOCK_WR(tbl_app);
 		NVP_UNLOCK_NODE_WR(nvf);
 		NVP_UNLOCK_FD_RD(nvf, cpuid);
-		return 0;
+		_nvp_FSYNC(file);
+		char fn[256];
+		get_file_name(fn, file);
+		MSG("Truncating %s from %d to %d\n", fn, nvf->node->true_length, length);
+		return _nvp_fileops->FTRUNC64(CALL_FTRUNC64);
 	}
 
+	char fn[256];
+	get_file_name(fn, file);
+	MSG("########################## %s #######################\n", fn);
+	if(strcmp("/mnt/pmem_emul/rocksdbtest-100/000331.sst", fn) == 0) {
+		MSG("\n\n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n\n");
+	}
+	
 	int result = _nvp_fileops->FTRUNC64(CALL_FTRUNC64);
 	_nvp_fileops->FSYNC(file);
 
@@ -5827,7 +5858,8 @@ RETT_READV _nvp_READV(INTF_READV)
 RETT_WRITEV _nvp_WRITEV(INTF_WRITEV)
 {
 	CHECK_RESOLVE_FILEOPS(_nvp_);
-	DEBUG("CALL: _nvp_WRITEV\n");
+	MSG("CALL: _nvp_WRITEV\n");
+	assert(0);
 
 	//TODO: opportunities for optimization exist here
 	int fail = 0;
@@ -6516,14 +6548,15 @@ RETT_MKDIRAT _nvp_MKDIRAT(INTF_MKDIRAT)
 }
 
 
-/*
+
 RETT_STAT _nvp_STAT(INTF_STAT)
 {
+	// MSG(" $$$$$$ IN STAT for %s  $$$$$$ \n", path);
 	RETT_STAT result = 0;
 	struct NVFile *nvf = NULL;
 	int cpuid = GET_CPUID();
-	return _nvp_fileops->STAT(_STAT_VER, path, buf);
-	assert(0);
+	// return _nvp_fileops->STAT(_STAT_VER, path, buf);
+	// assert(0);
 	result = _nvp_fileops->STAT(CALL_STAT);
 	pthread_spin_lock(&node_lookup_lock[0]);
 	if (_nvp_ino_lookup[buf->st_ino % 1024] != 0) {
@@ -6533,24 +6566,35 @@ RETT_STAT _nvp_STAT(INTF_STAT)
 		if (nvf->posix) {
 			NVP_UNLOCK_FD_RD(nvf, cpuid);
 			pthread_spin_unlock(&node_lookup_lock[0]);
+			MSG("%s: posix: Size of %s = %d\n", __func__, path, buf->st_size);
 			return result;
 		}
 		if (nvf->valid) {
+			if(buf->st_size != nvf->node->length)
+			{
+				MSG(" $$$$$$ Updating size for %s from %d to %d  $$$$$$ \n", path, buf->st_size, nvf->node->length);
+			}
 			buf->st_size = nvf->node->length;
 		}
 		NVP_UNLOCK_FD_RD(nvf, cpuid);
 	}
 	pthread_spin_unlock(&node_lookup_lock[0]);
+	int offs = -1;
+	if(nvf != NULL && nvf->offset != NULL) {
+		offs = *(nvf->offset);
+	}
+	MSG("%s: end: Size of %s = %d; current offset is %d\n", __func__, path, buf->st_size, offs);
 	return result;
 }
 
 RETT_STAT64 _nvp_STAT64(INTF_STAT64)
 {
+	MSG(" $$$$$$ IN STAT64 for %s  $$$$$$ \n", path);
 	RETT_STAT64 result = 0;
 	result = _nvp_fileops->STAT64(CALL_STAT64);
 	struct NVFile *nvf = NULL;
 	int cpuid = GET_CPUID();
-	assert(0);
+	// assert(0);
 	pthread_spin_lock(&node_lookup_lock[0]);
 	if (_nvp_ino_lookup[buf->st_ino % 1024] != 0) {
 		int fd = _nvp_ino_lookup[buf->st_ino % 1024];
@@ -6559,6 +6603,7 @@ RETT_STAT64 _nvp_STAT64(INTF_STAT64)
 		if (nvf->posix) {
 			NVP_UNLOCK_FD_RD(nvf, cpuid);
 			pthread_spin_unlock(&node_lookup_lock[0]);
+			MSG("%s: posix: Size of %s = %d\n", __func__, path, buf->st_size);
 			return result;
 		}
 		if (nvf->valid) {
@@ -6567,16 +6612,25 @@ RETT_STAT64 _nvp_STAT64(INTF_STAT64)
 		NVP_UNLOCK_FD_RD(nvf, cpuid);
 	}
 	pthread_spin_unlock(&node_lookup_lock[0]);
+	int offs = -1;
+	if(nvf != NULL) {
+		offs = *(nvf->offset);
+	}
+	MSG("%s: end: Size of %s = %d; current offset is %d\n", __func__, path, buf->st_size, offs);
 	return result;
 }
 
 RETT_LSTAT _nvp_LSTAT(INTF_LSTAT)
 {
+	assert(0);
+	MSG(" $$$$$$ IN LSTAT for %s  $$$$$$ \n");
 	return _nvp_STAT64(CALL_STAT64);
 }
 
 RETT_LSTAT64 _nvp_LSTAT64(INTF_LSTAT64)
 {
+	assert(0);
+	MSG(" $$$$$$ IN LSTAT64 for %s  $$$$$$ \n");
 	return _nvp_STAT64(CALL_STAT64);
 }
  
@@ -6584,21 +6638,37 @@ RETT_FSTAT _nvp_FSTAT(INTF_FSTAT)
 {
 	RETT_FSTAT result = 0;
 	result = _nvp_fileops->FSTAT(CALL_FSTAT);
+	// return result;
 	struct NVFile *nvf = NULL;
 	int cpuid = GET_CPUID();
-	assert(0);
+	// assert(0);
 	nvf = &_nvp_fd_lookup[file];
 	NVP_LOCK_FD_RD(nvf, cpuid);
+	char fn[256];
+	get_file_name(fn, file);
 	if (nvf->posix) {
 		NVP_UNLOCK_FD_RD(nvf, cpuid);
+		MSG("%s: posix: Size of %s = %d\n", __func__, fn, buf->st_size);
 		return result;
 	}
-	if (nvf->valid)
+	if (nvf->valid) {
+		if(buf->st_size != nvf->node->length) {
+			char fn[256];
+			get_file_name(fn, file);
+			MSG(" $$$$$$ IN FSTAT for %s from %d to %d $$$$$$ \n", fn, buf->st_size, nvf->node->length);
+			// raise(SIGINT);
+		}
 		buf->st_size = nvf->node->length;
+	}
 	NVP_UNLOCK_FD_RD(nvf, cpuid);
+	int offs = -1;
+	if(nvf != NULL && nvf->offset != NULL) {
+		offs = *(nvf->offset);
+	}
+	MSG("%s: end: Size of %s = %d; cur offset is %d\n", __func__, fn, buf->st_size, offs);
 	return result;
 }
-
+// b fileops_nvp.c:
 RETT_FSTAT64 _nvp_FSTAT64(INTF_FSTAT64)
 {
 	RETT_FSTAT64 result = 0;
@@ -6617,7 +6687,7 @@ RETT_FSTAT64 _nvp_FSTAT64(INTF_FSTAT64)
 	NVP_UNLOCK_FD_RD(nvf, cpuid);
 	return result;
 }
-*/
+
 
 /* Before doing an fallocate we do an fsync 
  * 
@@ -6627,6 +6697,7 @@ RETT_FSTAT64 _nvp_FSTAT64(INTF_FSTAT64)
 */
 RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 {
+	assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	RETT_POSIX_FALLOCATE result = 0;
 	struct stat sbuf;
@@ -6638,6 +6709,10 @@ RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 	if(nvf->posix) {
 		return _nvp_fileops->POSIX_FALLOCATE(CALL_POSIX_FALLOCATE);
 	}
+
+	char fn[256];
+	get_file_name(fn, file);
+	MSG("posix_fallocating from original size %d to new size %d\n", nvf->node->length, offset + len);
 
 	int cpuid = GET_CPUID();
 
@@ -6652,7 +6727,7 @@ RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 
 	result = _nvp_fileops->POSIX_FALLOCATE(CALL_POSIX_FALLOCATE);
 
-	int ret = fstat(file, &sbuf);
+	int ret = _nvp_fileops->FSTAT(_STAT_VER, file, &sbuf);
 	assert(ret == 0);
 	nvf->node->true_length = sbuf.st_size;
 	nvf->node->length = nvf->node->true_length;
@@ -6669,6 +6744,7 @@ RETT_POSIX_FALLOCATE _nvp_POSIX_FALLOCATE(INTF_POSIX_FALLOCATE)
 */
 RETT_POSIX_FALLOCATE64 _nvp_POSIX_FALLOCATE64(INTF_POSIX_FALLOCATE64)
 {
+	assert(0);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
 	RETT_POSIX_FALLOCATE64 result = 0;
 	struct stat sbuf;
@@ -6694,7 +6770,7 @@ RETT_POSIX_FALLOCATE64 _nvp_POSIX_FALLOCATE64(INTF_POSIX_FALLOCATE64)
 
 	result = _nvp_fileops->POSIX_FALLOCATE64(CALL_POSIX_FALLOCATE64);
 
-	int ret = fstat(file, &sbuf);
+	int ret = _nvp_fileops->FSTAT(_STAT_VER, file, &sbuf);
 	assert(ret == 0);
 	nvf->node->true_length = sbuf.st_size;
 	nvf->node->length = nvf->node->true_length;
@@ -6711,8 +6787,11 @@ RETT_POSIX_FALLOCATE64 _nvp_POSIX_FALLOCATE64(INTF_POSIX_FALLOCATE64)
 */
 RETT_FALLOCATE _nvp_FALLOCATE(INTF_FALLOCATE)
 {
+	char fn[256];
+	get_file_name(fn, file);
+	MSG("Imm Fallocating with file %s, 0, offset %d, len %d\n", fn, offset, len);
 	CHECK_RESOLVE_FILEOPS(_nvp_);
-	RETT_FALLOCATE result = 0;
+	RETT_FALLOCATE result = -1;
 	struct stat sbuf;
 
 	struct NVFile *nvf = &_nvp_fd_lookup[file];
@@ -6734,12 +6813,20 @@ RETT_FALLOCATE _nvp_FALLOCATE(INTF_FALLOCATE)
 	_nvp_FSYNC(file);
 	NVP_LOCK_NODE_WR(nvf);
 
+	// MSG("Fallocating with file %d, 0, offset %d, len %d\n", file, 0, offset, len);
+	if(mode | FALLOC_FL_PUNCH_HOLE) {
+		MSG("\n\n!!!!!!!!!!!!!!! PUNCHING HOLE !!!!!!!!!!!!!!!!!!!!!\n\n");
+	}
 	result = _nvp_fileops->FALLOCATE(CALL_FALLOCATE);
 
-	int ret = fstat(file, &sbuf);
+	int ret = _nvp_fileops->FSTAT(_STAT_VER, file, &sbuf);
 	assert(ret == 0);
 	nvf->node->true_length = sbuf.st_size;
 	nvf->node->length = nvf->node->true_length;
+
+	// char fn[256];
+	// get_file_name(fn, file);
+	MSG("fallocating %s from original size %d to new size %d and current size is %d; result = %d\n", fn, nvf->node->length, offset + len, sbuf.st_size, result);
 
 	NVP_UNLOCK_NODE_WR(nvf);
 	return result;
@@ -6769,8 +6856,12 @@ RETT_SYNC_FILE_RANGE _nvp_SYNC_FILE_RANGE(INTF_SYNC_FILE_RANGE) {
 	NVP_CHECK_NVF_VALID(nvf);
 
 #if POSIX_ENABLED
-	return _nvp_posix_sync_file_range(CALL_SYNC_FILE_RANGE, nvf);
+	result = _nvp_posix_sync_file_range(CALL_SYNC_FILE_RANGE, nvf);
 #endif
+
+	char fn[256];
+	get_file_name(fn, file);
+	MSG("%s: The file %s; offset %d; nbytes %d; result = %d \n", __func__, fn, offset, nbytes, result);
 
 	return result;
 }

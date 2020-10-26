@@ -84,7 +84,7 @@ int execv_done;
 #define OPS_64 OPS_FINITEPARAMS (OPEN64)
 
 #ifdef TRACE_FP_CALLS
-#define ALLOPS_FINITEPARAMS_WPAREN (POSIX_FALLOCATE) (POSIX_FALLOCATE64) (FALLOCATE) (READ) (FREAD) (CLEARERR) (FEOF) (FERROR) (FREAD_UNLOCKED) (WRITE) (FWRITE) (FSEEK) (FTELL) (FTELLO) (CLOSE) (FCLOSE) (SEEK) (FTRUNC) (DUP) (DUP2) (FORK) (VFORK) (READV) (WRITEV) (PIPE) (SOCKETPAIR) OPS_FINITEPARAMS_64 (PREAD) (PWRITE) (FSYNC) (FDSYNC) (SOCKET) (ACCEPT) (UNLINK) (UNLINKAT) (SYNC_FILE_RANGE)
+#define ALLOPS_FINITEPARAMS_WPAREN (POSIX_FALLOCATE) (POSIX_FALLOCATE64) (FALLOCATE) (READ) (FREAD) (CLEARERR) (FEOF) (FERROR) (FREAD_UNLOCKED) (WRITE) (FWRITE) (FSEEK) (FTELL) (FTELLO) (CLOSE) (FCLOSE) (SEEK) (FTRUNC) (DUP) (DUP2) (FORK) (VFORK) (READV) (WRITEV) (PIPE) (SOCKETPAIR) OPS_FINITEPARAMS_64 (PREAD) (PWRITE) (FSYNC) (FDSYNC) (SOCKET) (ACCEPT) (UNLINK) (UNLINKAT) (SYNC_FILE_RANGE) (STAT) (STAT64) (FSTAT) (FSTAT64) (LSTAT) (LSTAT64)
 //(POSIX_FALLOCATE) (POSIX_FALLOCATE64) (FALLOCATE) (STAT) (STAT64) (FSTAT) (FSTAT64) (LSTAT) (LSTAT64)
 #define ALLOPS_WPAREN (OPEN) (OPENAT) (CREAT) (EXECVE) (EXECVP) (EXECV) (FOPEN) (FOPEN64) (IOCTL) (TRUNC) (MKNOD) (MKNODAT) (FCNTL) ALLOPS_FINITEPARAMS_WPAREN
 #define SHM_WPAREN (SHM_COPY)
@@ -126,12 +126,13 @@ int execv_done;
 #define CHECK_RESOLVE_FILEOPS_OLDVERSION(NAME) do{			\
 		if(UNLIKELY(NAME##fileops==NULL)) {			\
 			if(NAME##resolve_fileops()!=0) {		\
-				ERROR("Couldn't resolve " #NAME "!\n"); \
+				MSG("$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$ Couldn't resolve " #NAME "!\n"); \
 			}						\
 		} } while(0)
 
 #define CHECK_RESOLVE_FILEOPS(NAME) do{					\
 		if(UNLIKELY(NAME##fileops==NULL)) {			\
+			raise(SIGINT); \
 			MSG("Tried to use "#NAME" fileops, but they weren't initialized!  BLARG\n" FAIL); \
 			assert(0);					\
 		} } while(0)
@@ -364,7 +365,7 @@ struct Fileops_p* default_resolve_fileops(char* tree, char* name);
 #define INTF_MKNOD int ver, const char* path, mode_t mode, dev_t* dev
 #define INTF_MKNODAT int ver, int dirfd, const char* path, mode_t mode, dev_t* dev
 
-#ifdef TRACE_FP_CALLS
+#if 1
 #define INTF_FOPEN  const char* __restrict path, const char* __restrict mode
 #define INTF_FOPEN64  const char* __restrict path, const char* __restrict mode
 #define INTF_FREAD  void* __restrict buf, size_t length, size_t nmemb, FILE* __restrict fp
