@@ -22,6 +22,7 @@
 #include <errno.h>
 #include <stdint.h>
 #include "debug.h"
+#include <execinfo.h>
 
 FILE * _xil_printf_file;
 
@@ -29,6 +30,25 @@ FILE* _nvp_print_fd;
 
 
 void printString(char *s);
+
+print_trace (void)
+{
+  void *array[40];
+  char **strings;
+  int size, i;
+
+  size = backtrace (array, 40);
+  strings = backtrace_symbols (array, size);
+  if (strings != NULL)
+  {
+
+    MSG("Obtained %d stack frames.\n", size);
+    for (i = 0; i < 6; i++)
+      MSG("%s\n", strings[i]);
+  }
+
+  free (strings);
+}
 
 
 static pthread_mutex_t __debug_mutex = PTHREAD_MUTEX_INITIALIZER;

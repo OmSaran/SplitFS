@@ -1,0 +1,516 @@
+NVP_MSG (862): _hub_init2: START
+NVP_MSG (862): CLFLUSHOPT is not supported! Using CLFLUSH 
+NVP_MSG (862): init_append_log: Initializing append log
+NVP_MSG (862): _nvp_init2: dr fd = 4, start addr = 0x7F4822A00000
+NVP_MSG (862): _nvp_init2: dr fd = 5, start addr = 0x7F481E800000
+NVP_MSG (862): _nvp_init2: dr fd = 6, start addr = 0x7F481A600000
+NVP_MSG (862): _nvp_init2: dr fd = 7, start addr = 0x7F4816400000
+NVP_MSG (862): _nvp_init2: dr fd = 8, start addr = 0x7F4812200000
+NVP_MSG (862): _nvp_init2: dr fd = 9, start addr = 0x7F480E000000
+NVP_MSG (862): _nvp_init2: dr fd = 10, start addr = 0x7F4809E00000
+NVP_MSG (862): _nvp_init2: dr fd = 11, start addr = 0x7F4805C00000
+NVP_MSG (862): _nvp_init2: dr fd = 12, start addr = 0x7F4801A00000
+NVP_MSG (862): _nvp_init2: dr fd = 13, start addr = 0x7F47FD800000
+NVP_MSG (862): _nvp_init2: Tbl mmaps set
+NVP_MSG (862): _nvp_init2: Global locks created
+NVP_MSG (862): _nvp_init2: initialized environment, OPEN_MAX = 1024
+NVP_MSG (862): _hub_init2: END
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/LOG" with the following flags (0x41): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/LOG = 0; current offset is -1
+NVP_MSG (862): Imm Fallocating with file /mnt/pmem_emul/rocksdbtest-100/LOG, 0, offset 0, len 4096
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/LOG is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/LOG is being remapped; true length = 0; length = 0; stat_len=0!!
+NVP_MSG (862): Obtained 17 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_FSYNC+0x14b) [0x7f482fbb7d9b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_FALLOCATE+0xed) [0x7f482fbb8b2d]
+NVP_MSG (862): ./db_bench() [0x612ec8]
+NVP_MSG (862): 
+
+!!!!!!!!!!!!!!! PUNCHING HOLE !!!!!!!!!!!!!!!!!!!!!
+
+NVP_MSG (862): fallocating /mnt/pmem_emul/rocksdbtest-100/LOG from original size 0 to new size 4096 and current size is 0; result = 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): Imm Fallocating with file /mnt/pmem_emul/rocksdbtest-100/LOG, 0, offset 0, len 131072
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/LOG is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/LOG is being remapped; true length = 0; length = 0; stat_len=0!!
+NVP_MSG (862): Obtained 17 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_FSYNC+0x14b) [0x7f482fbb7d9b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_FALLOCATE+0xed) [0x7f482fbb8b2d]
+NVP_MSG (862): ./db_bench() [0x618d88]
+NVP_MSG (862): 
+
+!!!!!!!!!!!!!!! PUNCHING HOLE !!!!!!!!!!!!!!!!!!!!!
+
+NVP_MSG (862): fallocating /mnt/pmem_emul/rocksdbtest-100/LOG from original size 0 to new size 131072 and current size is 0; result = 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000200.log = 15461262; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 = 11875; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100 = 4096; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/LOCK = 0; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/LOCK" with the following flags (0x80042): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/LOCK = 0; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/CURRENT = 16; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/CURRENT" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/CURRENT = 16; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/CURRENT = 16; cur offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/CURRENT
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/CURRENT is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/CURRENT is being remapped; true length = 16; length = 16; stat_len=16!!
+NVP_MSG (862): Obtained 16 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/CURRENT with before_offset = 0; after_offset = 0, before_true_length = 16; true_length 16; and before_length=16; after_length = 16; before_stat_len = 16; after_stat_len = 16
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/CURRENT = 16; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/CURRENT" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/CURRENT = 16; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/CURRENT = 16; cur offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/CURRENT
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/CURRENT is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/CURRENT is being remapped; true length = 16; length = 16; stat_len=16!!
+NVP_MSG (862): Obtained 19 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x6193c2]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/CURRENT with before_offset = 16; after_offset = 16, before_true_length = 16; true_length 16; and before_length=16; after_length = 16; before_stat_len = 16; after_stat_len = 16
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 = 11875; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 = 11875; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 = 11875; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 = 11875; current offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 is being remapped; true length = 11875; length = 11875; stat_len=11875!!
+NVP_MSG (862): Obtained 18 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x6193c2]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/MANIFEST-000008 with before_offset = 11875; after_offset = 11875, before_true_length = 11875; true_length 11875; and before_length=11875; after_length = 11875; before_stat_len = 11875; after_stat_len = 11875
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000176.sst = 4894903; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000176.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000176.sst = 4894903; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000197.sst = 4902522; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000176.sst = 4894903; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000199.sst = 4898718; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000199.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000201.sst = 4890663; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000201.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000201.sst = 4890663; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000178.sst = 4884414; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000201.sst = 4890663; cur offset is 0
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000197.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000199.sst = 4898718; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000178.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000174.sst = 4902400; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000171.sst = 4908125; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000171.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000178.sst = 4884414; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000174.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000176.sst = 4894903; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000197.sst = 4902522; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000178.sst = 4884414; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000171.sst = 4908125; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000201.sst = 4890663; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000199.sst = 4898718; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000169.sst = 4907774; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000169.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000169.sst = 4907774; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000174.sst = 4902400; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000192.sst = 4905578; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000192.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000178.sst = 4884414; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000171.sst = 4908125; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000197.sst = 4902522; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000167.sst = 4905047; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000167.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000194.sst = 4905611; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000194.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000190.sst = 4904475; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000190.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000174.sst = 4902400; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000169.sst = 4907774; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000192.sst = 4905578; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000194.sst = 4905611; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000199.sst = 4898718; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000190.sst = 4904475; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000188.sst = 4899760; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000188.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000167.sst = 4905047; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000171.sst = 4908125; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000192.sst = 4905578; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000167.sst = 4905047; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000190.sst = 4904475; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000188.sst = 4899760; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000194.sst = 4905611; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000197.sst = 4902522; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000169.sst = 4907774; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000174.sst = 4902400; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000165.sst = 4900165; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000165.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000165.sst = 4900165; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000188.sst = 4899760; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000186.sst = 4887550; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000186.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000186.sst = 4887550; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000186.sst = 4887550; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000192.sst = 4905578; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000165.sst = 4900165; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000186.sst = 4887550; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000167.sst = 4905047; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000194.sst = 4905611; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000190.sst = 4904475; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000188.sst = 4899760; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000165.sst = 4900165; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000163.sst = 4890585; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000163.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000163.sst = 4890585; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000163.sst = 4890585; cur offset is 0
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000163.sst = 4890585; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000184.sst = 4877083; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000184.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000184.sst = 4877083; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000184.sst = 4877083; cur offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000184.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000184.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000184.sst is being remapped; true length = 4877083; length = 4877083; stat_len=4877083!!
+NVP_MSG (862): Obtained 21 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000184.sst with before_offset = 0; after_offset = 0, before_true_length = 4877083; true_length 4877083; and before_length=4877083; after_length = 4877083; before_stat_len = 4877083; after_stat_len = 4877083
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000161.sst = 4878204; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000161.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000161.sst = 4878204; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000161.sst = 4878204; cur offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000161.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000161.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000161.sst is being remapped; true length = 4878204; length = 4878204; stat_len=4878204!!
+NVP_MSG (862): Obtained 21 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000161.sst with before_offset = 0; after_offset = 0, before_true_length = 4878204; true_length 4878204; and before_length=4878204; after_length = 4878204; before_stat_len = 4878204; after_stat_len = 4878204
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000159.sst = 4870502; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000159.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000159.sst = 4870502; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000159.sst = 4870502; cur offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000159.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000159.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000159.sst is being remapped; true length = 4870502; length = 4870502; stat_len=4870502!!
+NVP_MSG (862): Obtained 21 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000159.sst with before_offset = 0; after_offset = 0, before_true_length = 4870502; true_length 4870502; and before_length=4870502; after_length = 4870502; before_stat_len = 4870502; after_stat_len = 4870502
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000157.sst = 70324387; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/000157.sst" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000157.sst = 70324387; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000157.sst = 70324387; cur offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000157.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000157.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000157.sst is being remapped; true length = 70324387; length = 70324387; stat_len=70324387!!
+NVP_MSG (862): Obtained 21 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000157.sst with before_offset = 0; after_offset = 0, before_true_length = 70324387; true_length 70324387; and before_length=70324387; after_length = 70324387; before_stat_len = 70324387; after_stat_len = 70324387
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/IDENTITY = 37; current offset is -1
+NVP_MSG (862): Attempting to _nvp_OPEN the file "/mnt/pmem_emul/rocksdbtest-100/IDENTITY" with the following flags (0x80000): 
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/IDENTITY = 37; current offset is -1
+NVP_MSG (862): _nvp_FSTAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/IDENTITY = 37; cur offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/IDENTITY = 37; current offset is 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/IDENTITY
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/IDENTITY is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/IDENTITY is being remapped; true length = 37; length = 37; stat_len=37!!
+NVP_MSG (862): Obtained 17 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x6193c2]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/IDENTITY with before_offset = 37; after_offset = 37, before_true_length = 37; true_length 37; and before_length=37; after_length = 37; before_stat_len = 37; after_stat_len = 37
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000201.sst = 4890663; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000199.sst = 4898718; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000197.sst = 4902522; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000194.sst = 4905611; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000192.sst = 4905578; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000190.sst = 4904475; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000188.sst = 4899760; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000186.sst = 4887550; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000184.sst = 4877083; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000178.sst = 4884414; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000176.sst = 4894903; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000174.sst = 4902400; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000171.sst = 4908125; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000169.sst = 4907774; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000167.sst = 4905047; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000165.sst = 4900165; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000163.sst = 4890585; current offset is 0
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000161.sst = 4878204; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000159.sst = 4870502; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000157.sst = 70324387; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000172.sst = 70325308; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000179.sst = 70325805; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000180.sst = 70324706; current offset is -1
+NVP_MSG (862): _nvp_STAT: end: Size of /mnt/pmem_emul/rocksdbtest-100/000181.sst = 23307557; current offset is -1
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000201.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000201.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000201.sst is being remapped; true length = 4890663; length = 4890663; stat_len=4890663!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000201.sst with before_offset = 0; after_offset = 0, before_true_length = 4890663; true_length 4890663; and before_length=4890663; after_length = 4890663; before_stat_len = 4890663; after_stat_len = 4890663
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000199.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000199.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000199.sst is being remapped; true length = 4898718; length = 4898718; stat_len=4898718!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000199.sst with before_offset = 0; after_offset = 0, before_true_length = 4898718; true_length 4898718; and before_length=4898718; after_length = 4898718; before_stat_len = 4898718; after_stat_len = 4898718
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000197.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000197.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000197.sst is being remapped; true length = 4902522; length = 4902522; stat_len=4902522!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000197.sst with before_offset = 0; after_offset = 0, before_true_length = 4902522; true_length 4902522; and before_length=4902522; after_length = 4902522; before_stat_len = 4902522; after_stat_len = 4902522
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000194.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000194.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000194.sst is being remapped; true length = 4905611; length = 4905611; stat_len=4905611!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000194.sst with before_offset = 0; after_offset = 0, before_true_length = 4905611; true_length 4905611; and before_length=4905611; after_length = 4905611; before_stat_len = 4905611; after_stat_len = 4905611
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000192.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000192.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000192.sst is being remapped; true length = 4905578; length = 4905578; stat_len=4905578!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000192.sst with before_offset = 0; after_offset = 0, before_true_length = 4905578; true_length 4905578; and before_length=4905578; after_length = 4905578; before_stat_len = 4905578; after_stat_len = 4905578
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000190.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000190.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000190.sst is being remapped; true length = 4904475; length = 4904475; stat_len=4904475!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000190.sst with before_offset = 0; after_offset = 0, before_true_length = 4904475; true_length 4904475; and before_length=4904475; after_length = 4904475; before_stat_len = 4904475; after_stat_len = 4904475
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000188.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000188.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000188.sst is being remapped; true length = 4899760; length = 4899760; stat_len=4899760!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000188.sst with before_offset = 0; after_offset = 0, before_true_length = 4899760; true_length 4899760; and before_length=4899760; after_length = 4899760; before_stat_len = 4899760; after_stat_len = 4899760
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000186.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000186.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000186.sst is being remapped; true length = 4887550; length = 4887550; stat_len=4887550!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000186.sst with before_offset = 0; after_offset = 0, before_true_length = 4887550; true_length 4887550; and before_length=4887550; after_length = 4887550; before_stat_len = 4887550; after_stat_len = 4887550
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000178.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000178.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000178.sst is being remapped; true length = 4884414; length = 4884414; stat_len=4884414!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000178.sst with before_offset = 0; after_offset = 0, before_true_length = 4884414; true_length 4884414; and before_length=4884414; after_length = 4884414; before_stat_len = 4884414; after_stat_len = 4884414
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000176.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000176.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000176.sst is being remapped; true length = 4894903; length = 4894903; stat_len=4894903!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000176.sst with before_offset = 0; after_offset = 0, before_true_length = 4894903; true_length 4894903; and before_length=4894903; after_length = 4894903; before_stat_len = 4894903; after_stat_len = 4894903
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000174.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000174.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000174.sst is being remapped; true length = 4902400; length = 4902400; stat_len=4902400!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000174.sst with before_offset = 0; after_offset = 0, before_true_length = 4902400; true_length 4902400; and before_length=4902400; after_length = 4902400; before_stat_len = 4902400; after_stat_len = 4902400
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000171.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000171.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000171.sst is being remapped; true length = 4908125; length = 4908125; stat_len=4908125!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000171.sst with before_offset = 0; after_offset = 0, before_true_length = 4908125; true_length 4908125; and before_length=4908125; after_length = 4908125; before_stat_len = 4908125; after_stat_len = 4908125
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000169.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000169.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000169.sst is being remapped; true length = 4907774; length = 4907774; stat_len=4907774!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000169.sst with before_offset = 0; after_offset = 0, before_true_length = 4907774; true_length 4907774; and before_length=4907774; after_length = 4907774; before_stat_len = 4907774; after_stat_len = 4907774
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000167.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000167.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000167.sst is being remapped; true length = 4905047; length = 4905047; stat_len=4905047!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000167.sst with before_offset = 0; after_offset = 0, before_true_length = 4905047; true_length 4905047; and before_length=4905047; after_length = 4905047; before_stat_len = 4905047; after_stat_len = 4905047
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000165.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000165.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000165.sst is being remapped; true length = 4900165; length = 4900165; stat_len=4900165!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000165.sst with before_offset = 0; after_offset = 0, before_true_length = 4900165; true_length 4900165; and before_length=4900165; after_length = 4900165; before_stat_len = 4900165; after_stat_len = 4900165
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000163.sst
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/000163.sst is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/000163.sst is being remapped; true length = 4890585; length = 4890585; stat_len=4890585!!
+NVP_MSG (862): Obtained 24 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x61943b]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/000163.sst with before_offset = 0; after_offset = 0, before_true_length = 4890585; true_length 4890585; and before_length=4890585; after_length = 4890585; before_stat_len = 4890585; after_stat_len = 4890585
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/LOCK
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/LOCK is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/LOCK is being remapped; true length = 0; length = 0; stat_len=0!!
+NVP_MSG (862): Obtained 17 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x6179cb]
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/LOCK with before_offset = 0; after_offset = 0, before_true_length = 0; true_length 0; and before_length=0; after_length = 0; before_stat_len = 0; after_stat_len = 0
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/LOG
+NVP_MSG (862): The file /mnt/pmem_emul/rocksdbtest-100/LOG is being synced 
+NVP_MSG (862): DYNAMIC_REMAP: /mnt/pmem_emul/rocksdbtest-100/LOG is being remapped; true length = 0; length = 17217; stat_len=0!!
+NVP_MSG (862): Obtained 18 stack frames.
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libnvp.so(print_trace+0x2f) [0x7f48316b7c4f]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(+0x1051e) [0x7f482fbb551e]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(swap_extents+0x19) [0x7f482fbb58c9]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_REAL_CLOSE+0x56b) [0x7f482fbb952b]
+NVP_MSG (862): /home/om/wspace/SplitFS/splitfs/libfileops_nvp.so(_nvp_CLOSE+0x38) [0x7f482fbb98c8]
+NVP_MSG (862): ./db_bench() [0x618626]
+NVP_MSG (862): DR: /mnt/pmem_emul/rocksdbtest-100/LOG: file_inode = 160, dr_inode = 25, file_fd = 16, dr_fd = 4, valid_offset = 0, file_offset = 0, dr_offset = 0, len = 17217
+NVP_MSG (862): /mnt/pmem_emul/rocksdbtest-100/LOG: STAT size after swap 17217. Correct size = 17217
+NVP_MSG (862): Closing the file /mnt/pmem_emul/rocksdbtest-100/LOG with before_offset = 17217; after_offset = 17217, before_true_length = 0; true_length 17217; and before_length=17217; after_length = 17217; before_stat_len = 0; after_stat_len = 17217
+open error: Corruption: Sst file size mismatch: /mnt/pmem_emul/rocksdbtest-100/000186.sst. Size recorded in manifest 4887202, actual size 4887550
+
+NVP_MSG (862): exit handler
+NVP_MSG (862): Exit: print stats
+NVP_MSG (862): ====================== NVP IO stats: ======================
+NVP_MSG (862): open 26, close 26, async close 0
+NVP_MSG (862): mmap 10, unlink 0, stat 0
+NVP_MSG (862): dr mmap 10, dr mmap critical path 0
+NVP_MSG (862): fsync 2, appendfsync: count 1 size 0 average 0
+NVP_MSG (862): READ: count 80, size 3381330, average 42266
+NVP_MSG (862): WRITE: count 173, size 17217, average 99
+NVP_MSG (862): memcpy READ: count 0, size 0, average 0
+NVP_MSG (862): anon READ: count 0, size 0, average 0
+NVP_MSG (862): memcpy WRITE: count 173, size 17217, average 99
+NVP_MSG (862): anon WRITE: count 173, size 17217, average 99
+NVP_MSG (862): posix READ: count 79, size 3381330, average 42801
+NVP_MSG (862): posix WRITE: count 0, size 0, average 0
+NVP_MSG (862): write extends 173, total 173
+NVP_MSG (862): MFENCE: count 0
+NVP_MSG (862): CLFLUSHOPT: count 0
+NVP_MSG (862): NON_TEMPORAL_WRITES: count 173, size 17217, average 99
+NVP_MSG (862): TEMPORAL WRITES: count 0, size 0, average 0
+NVP_MSG (862): TOTAL SYSCALLS (open + close + read + write + fsync): count 131
+NVP_MSG (862): calling cleanup
+NVP_MSG (862): nvp_cleanup: Done Cleaning up

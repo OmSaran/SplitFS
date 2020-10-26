@@ -748,6 +748,13 @@ static inline size_t dynamic_remap_updates(int file_fd, struct NVNode *node, int
 
 static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 {
+
+	char fn[256];
+	get_file_name(fn, file_fd);
+	struct stat sbuf;
+	_nvp_fileops->FSTAT(_STAT_VER, file_fd, &sbuf);
+	MSG("DYNAMIC_REMAP: %s is being remapped; true length = %d; length = %d; stat_len=%d!!\n", fn, node->true_length, node->length, sbuf.st_size);
+	print_trace();
 	size_t len_to_write = 0, len_written = 0, len_to_swap = 0, len_swapped = 0;
 	off_t app_start_addr = 0;
 	off_t app_start_off = 0;
@@ -799,19 +806,32 @@ static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 		if (len_to_swap) {
 			app_start_addr = node->dr_info.start_addr + app_start_off;
 
-			DEBUG_FILE("%s: file_inode = %lu, dr_inode = %lu, file_fd = %d, dr_fd = %d, "
+			MSG("DR: %s: file_inode = %lu, dr_inode = %lu, file_fd = %d, dr_fd = %d, "
 				   "valid_offset = %lld, file_offset = %lld, dr_offset = %lld, len = %lu\n",
-				   __func__, node->serialno, node->dr_info.dr_serialno, file_fd,
+				   fn, node->serialno, node->dr_info.dr_serialno, file_fd,
 				   node->dr_info.dr_fd, node->dr_info.valid_offset, file_start_off,
 				   app_start_off, len_to_swap);
 
 			// Perform swap extents from append DR file
+			// RCA: Run ycsb workloads
+			/*
+				export trace_file=/home/om/wspace/rocksdb2/workloads/loada_5M;
+				LD_PRELOAD=$sl ./db_bench $1--benchmarks=ycsb --db=/mnt/pmem_emul/rocksdbtest-100 --threads=1 --open_files=1000 --use_existing_db=0 2> /home/om/wspace/SplitFS/loada.txt
+
+				export trace_file=/home/om/wspace/rocksdb2/workloads/runa_5M_5M;
+				LD_PRELOAD=$sl ./db_bench $1 --benchmarks=ycsb --db=/mnt/pmem_emul/rocksdbtest-100 --threads=1 --open_files=1000 --use_existing_db=1 2> /home/om/wspace/SplitFS/runa.txt
+
+				Look for logs in 'runa.txt' -- specifically, look for something like: "open error: Corruption: Sst file size mismatch: /mnt/pmem_emul/rocksdbtest-100/000186.sst. Size recorded in manifest 4887202, actual size 4887550"
+				Look for logs corresponding to '000186.sst' in loada.txt. There should also be log that has something like 'STAT size after swap 4887550. Correct size = 4887202'
+			*/
 			len_swapped = syscall(335, file_fd,
 					      node->dr_info.dr_fd,
 					      file_start_off,
 					      app_start_off,
 					      (const char *) node->dr_info.start_addr,
 					      len_to_swap);
+			_nvp_fileops->FSTAT(_STAT_VER, file_fd, &sbuf);
+			MSG("%s: STAT size after swap %d. Correct size = %d\n", fn, sbuf.st_size, node->length);
 #if 0
 			len_swapped = _nvp_fileops->PWRITE(file_fd, (char *) (node->dr_info.start_addr + app_start_off), len_to_swap, file_start_off);
 #endif
@@ -858,6 +878,10 @@ static inline void fsync_flush_on_fsync(struct NVFile* nvf, int cpuid, int close
 #else
 	struct NVTable_maps *tbl_over = NULL;
 #endif // DATA_JOURNALING_ENABLED
+
+	char fn[256];
+	get_file_name(fn, nvf->fd);
+	MSG("The file %s is being synced \n", fn);
 
 	NVP_LOCK_NODE_WR(nvf);
 	TBL_ENTRY_LOCK_WR(tbl_app);
@@ -3996,6 +4020,11 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	int before_offset = *(nvf->offset);
 	int before_true_length = nvf->node->true_length;
 	int before_length = nvf->node->length;
+	struct stat sbuf;
+	if(_nvp_fileops->FSTAT(_STAT_VER, file, &sbuf) != 0) {
+		perror("Failed in before stat");
+	}
+	int before_stat_len = sbuf.st_size;
 
 	num_close++;
 	if (nvf->posix) {
@@ -4022,7 +4051,11 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	fsync_flush_on_fsync(nvf, cpuid, 1, 0);	
 #endif
 
-	MSG("Closing the file %s with before_offset = %d; after_offset = %d, before_true_length = %d; true_length %d; and before_length=%d; after_length %d\n", fn, before_offset, *(nvf->offset), before_true_length, nvf->node->true_length, before_length, nvf->node->length);
+	if(_nvp_fileops->FSTAT(_STAT_VER, file, &sbuf) != 0) {
+		perror("Failed in after stat");
+	}
+	int after_stat_len = sbuf.st_size;
+	MSG("Closing the file %s with before_offset = %d; after_offset = %d, before_true_length = %d; true_length %d; and before_length=%d; after_length = %d; before_stat_len = %d; after_stat_len = %d\n", fn, before_offset, *(nvf->offset), before_true_length, nvf->node->true_length, before_length, nvf->node->length, before_stat_len, after_stat_len);
 	/* 
 	 * nvf->node->reference contains how many threads have this file open. 
 	 */
@@ -4046,7 +4079,7 @@ RETT_CLOSE _nvp_REAL_CLOSE(INTF_CLOSE, ino_t serialno, int async_file_closing) {
 	NVP_LOCK_NODE_WR(nvf);
 	nvf->node->reference--;
 	NVP_UNLOCK_NODE_WR(nvf);
-	_nvp_FTRUNC(file, before_true_length);
+	// _nvp_FTRUNC(file, before_true_length);
 
 	if (nvf->node->reference == 0) {
 		nvf->node->serialno = 0;
